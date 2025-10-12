@@ -2,3 +2,5 @@ customtkinter
 yt-dlp
 Pillow
 cx-Freeze
+
+#pyinstaller --onefile --windowed --name DockTube --icon=logo.ico --add-data "logo.ico;." --add-data "logos.ico;." --add-data "yt-dlp.exe;." doctube_main.py
