@@ -22,7 +22,10 @@ It can download **single videos** as well as **entire playlists**, making it eas
 ![DockTube Main Screen](scrn1.PNG)
 
 ### Download Animation / Progress
-![Download Animation](animationa.gif)
+
+<p align="center">
+  <img src="https://github.com/Mamuntheprogrammer/docktube/blob/main/animation.gif?raw=true" alt="DockTube YouTube Videos/Playlist Downloader "/>
+</p>
 
 ---
 
