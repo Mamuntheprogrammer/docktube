@@ -525,26 +525,34 @@ class YouTubeDownloader:
         def download_thread():
             success_count = 0
             
-            for video_id, _ in self.selected_videos:
-                if not self.downloading:  # Check if stopped
+            for index, (video_id, _) in enumerate(self.selected_videos, start=1):  # Add serial number
+                if not self.downloading:
                     break
                     
-                while self.paused:  # Handle pause
+                while self.paused:
                     time.sleep(0.1)
-                    if not self.downloading:  # Check if stopped while paused
+                    if not self.downloading:
                         break
                         
                 if not self.downloading:
                     break
                     
-                self.window.after(0, lambda vid=video_id: self.status_label.configure(
-                    text=f"Downloading {self.videos[vid]['title']}..."
+                self.window.after(0, lambda idx=index, vid=video_id: self.status_label.configure(
+                    text=f"{idx}. Downloading {self.videos[vid]['title']}..."
                 ))
                 
-                if self.download_video(video_id, save_path):
+                # Attempt to download video
+                success = self.download_video(video_id, save_path)
+
+                # Backup check: see if file exists in save_path
+                video_file = os.path.join(save_path, f"{self.videos[video_id]['title']}.mp4")
+                if not success and os.path.exists(video_file):
+                    success = True  # Video exists, so mark as success
+                
+                if success:
                     success_count += 1
             
-            if self.downloading:  # Only show completion message if not stopped
+            if self.downloading:
                 self.window.after(0, lambda: self.status_label.configure(
                     text=f"Download completed! {success_count} of {len(self.selected_videos)} videos downloaded successfully."
                 ))
@@ -558,6 +566,8 @@ class YouTubeDownloader:
                 else:
                     self.window.after(0, lambda: messagebox.showerror("Error",
                         "No videos were downloaded successfully."))
+
+
             
             # Reset UI
             self.downloading = False
