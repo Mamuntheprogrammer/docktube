@@ -1,0 +1,3 @@
+yt-dlp>=2024.8.6
+customtkinter>=5.2.2
+imageio-ffmpeg  # static ffmpeg binary so HD video+audio can merge without admin install

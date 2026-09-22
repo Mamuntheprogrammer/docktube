@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playlist → Single Video Downloader</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+<div class="brand">▶ Playlist<span>Merger</span></div>
+<div class="top-actions">
+<button id="themeBtn" class="btn ghost">🌙</button>
+<button id="historyBtn" class="btn ghost">History</button>
+<button id="folderBtn" class="btn ghost">Open folder</button>
+</div>
+</header>
+<main class="wrap">
+<section class="card">
+<h2>1 · Paste playlist URL or local folder</h2>
+<div class="row">
+<input id="url" placeholder="https://…playlist or D:\Videos (local merge)">
+<button id="analyzeBtn" class="btn primary">Analyze / List files</button>
+</div>
+<div id="analyzeMsg" class="msg"></div>
+</section>
+<section class="card hidden" id="listCard">
+<h2>2 · Select videos <span id="plTitle" class="muted"></span></h2>
+<div class="controls">
+<label>Quality <select id="quality">
+<option value="best">Best</option>
+<option value="1080p">1080p</option>
+<option value="720p" selected>720p</option>
+<option value="480p">480p</option>
+<option value="360p">360p</option>
+</select></label>
+<label>Format <select id="format"><option value="mp4" selected>MP4</option><option value="mkv">MKV</option></select></label>
+<label>Concurrent <input id="conc" type="number" min="1" max="6" value="3"></label>
+<button id="allBtn" class="btn ghost">All</button>
+<button id="noneBtn" class="btn ghost">None</button>
+<button id="verifyBtn" class="btn ghost">Verify ✓ (pre-check)</button>
+<button id="dlBtn" class="btn primary">Download + Merge</button>
+</div>
+<div id="vlist" class="vlist"></div>
+</section>
+<section class="card hidden" id="progCard">
+<h2>3 · Progress</h2>
+<div class="overall">
+<div class="orow"><div><b id="oPct">0%</b> <span id="oCounts" class="muted"></span></div><div id="oSpeed" class="muted"></div></div>
+<div class="bar big"><div id="oBar"></div></div>
+<div class="orow muted"><span id="oSize"></span><span id="oEta"></span></div>
+<div class="orow btns">
+<button id="cancelBtn" class="btn danger">Cancel</button>
+<button id="retryBtn" class="btn ghost">Retry failed</button>
+<button id="mergeBtn" class="btn ghost">Re-merge</button>
+<a id="saveBtn" class="btn primary hidden">Download merged file</a>
+</div>
+<div id="doneMsg" class="msg"></div>
+</div>
+<div id="plist" class="plist"></div>
+</section>
+<section class="card hidden" id="histCard">
+<h2>Download history / Cache</h2>
+<div class="row"><span id="cacheInfo" class="muted"></span></div>
+<div class="row btns"><button id="clearCacheBtn" class="btn ghost">Clear cache (temp only)</button><button id="clearHistBtn" class="btn danger">Clear history</button><label class="muted"><input type="checkbox" id="delMerged"> also delete merged files</label></div>
+<div id="hist"></div>
+</section>
+</main>
+<footer class="foot muted">For content you own or have permission to download. No DRM / paywall bypass.</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

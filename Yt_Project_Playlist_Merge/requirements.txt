@@ -1,0 +1,5 @@
+yt-dlp>=2024.8.6
+imageio-ffmpeg>=0.5.1
+customtkinter>=5.2.2
+Pillow>=10.0.0
+requests>=2.31.0
